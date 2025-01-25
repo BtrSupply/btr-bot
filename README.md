@@ -2,7 +2,7 @@
   <img style="border-radius=25px; max-height=250px;" height="400" src="./banner.jpg" />
   <!-- <h1>Chomp</h1> -->
   <p>
-    <a href="https://t.me/btrsupply"><img alt="BtrSupply" src="https://img.shields.io/badge/BTRSupply--white?style=social&logo=telegram">
+    <a href="https://t.me/btrsupply"><img alt="BtrSupply" src="https://img.shields.io/badge/BTRSupply--white?style=social&logo=telegram"></a>
     <a href="https://x.com/BtrSupply"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/BtrSupply?label=@BtrSupply&style=social"></a>
     <!-- <a href="https://docs.astrolab.fi"><img alt="Astrolab Docs" src="https://img.shields.io/badge/astrolab_docs-F9C3B3" /></a> -->
     <a href="https://opensource.org/licenses/MIT"><img alt="License" src="https://img.shields.io/github/license/BtrSupply/btr-bot?style=social" /></a>
