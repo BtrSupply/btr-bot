@@ -1,6 +1,6 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes
-from .helpers import get_schema, get_tokens, last, convert, pegcheck, create_keyboard_layout, format_price_message, round_sigfig
+from .helpers import get_schema, get_tokens, last, convert, pegcheck, create_keyboard_layout, format_price_message, round_sigfig, format_pegcheck_message
 
 async def start_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
   help_text = """
@@ -141,17 +141,7 @@ async def pegcheck_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
       peg_data = await pegcheck(f'{base_token}.idx', f'{quote_token}.idx')
-      status = '✅ Pegged' if abs(peg_data['deviation']) <= peg_data['max_deviation'] else '⚠️ Deviating'
-      message = f"""
-*--------------------------------------------------------
-🔗 Peg Check {base_token}-{quote_token}
---------------------------------------------------------
-Status: {status}
-Deviation: {peg_data['deviation']*100:.2f}%
-Base Price: {peg_data['base_price']}
-Quote Price: {peg_data['quote_price']}
---------------------------------------------------------*
-"""
+      message = await format_pegcheck_message(base_token, quote_token, peg_data)
       await update.message.reply_text(message, parse_mode='Markdown')
       return
       

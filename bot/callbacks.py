@@ -3,9 +3,10 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes
 from .helpers import (
     last, fetch_liquidity_map, convert, 
-    pegcheck as pegcheck,  # Rename here too
+    pegcheck,
     get_tokens, format_price_message, 
-    create_keyboard_layout
+    create_keyboard_layout,
+    format_pegcheck_message 
 )
 
 async def handle_callback_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -52,18 +53,8 @@ async def handle_callback_query(update: Update, context: ContextTypes.DEFAULT_TY
 
     elif data[1] == 'check':
       base_token, quote_token = data[2], data[3]
-      peg_data = await pegcheck(f'{base_token}.idx', f'{quote_token}.idx')  # Use renamed function
-      status = '✅ Pegged' if math.abs(peg_data['deviation']) <= peg_data['max_deviation'] else '⚠️ Deviating'
-      message = f"""
-*--------------------------------------------------------
-🔗 Peg Check {base_token}-{quote_token}
---------------------------------------------------------
-Status: {status}
-Deviation: {peg_data['deviation']*100:.2f}%
---------------------------------------------------------*
-Base Price: {peg_data['base_price']}
-Quote Price: {peg_data['quote_price']}
-"""
+      peg_data = await pegcheck(f'{base_token}.idx', f'{quote_token}.idx')
+      message = await format_pegcheck_message(base_token, quote_token, peg_data)
       await query.edit_message_text(text=message, parse_mode='Markdown')
 
   elif action == 'liqmap':

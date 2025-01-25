@@ -62,6 +62,19 @@ async def convert(base, quote, amount):
 async def pegcheck(base, quote):
   return await fetch_data(f"pegcheck/{base}-{quote}")
 
+async def format_pegcheck_message(base_token: str, quote_token: str, peg_data: dict) -> str:
+    status = '✅ Pegged' if abs(peg_data['deviation']) <= peg_data['max_deviation'] else '⚠️ Deviating'
+    return f"""
+*--------------------------------------------------------
+🔗 Peg Check {base_token}-{quote_token}
+--------------------------------------------------------
+Status: {status}
+Deviation: {peg_data['deviation']*100:.2f}%
+--------------------------------------------------------*
+Base Price: {peg_data['base_price']}
+Quote Price: {peg_data['quote_price']}
+"""
+
 def create_keyboard_layout(
   tokens: list[str], callback_prefix: str, max_cols: int = 3
 ) -> list[list[InlineKeyboardButton]]:
