@@ -2,7 +2,10 @@ MIT License
 
 Copyright (c) 2024 BTR Supply
 
-This license applies only to the Telegram bot software that acts as a client to the BTR Markets API (https://api.btr.markets). The BTR Markets API itself is a separate product with its own terms of service and is not covered by this license.
+This license applies only to the Telegram bot software that acts as a client
+to the BTR Markets API (https://api.btr.markets).
+The BTR Markets API itself is a separate product with its own terms
+of service and is not covered by this license.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
