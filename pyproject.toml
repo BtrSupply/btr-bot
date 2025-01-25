@@ -1,0 +1,11 @@
+[project]
+name = "btr-bot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "aiohttp>=3.11.11",
+    "python-dotenv>=1.0.1",
+    "python-telegram-bot>=21.10",
+]
