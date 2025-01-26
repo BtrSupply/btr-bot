@@ -65,12 +65,12 @@ async def pegcheck(base, quote):
 async def format_pegcheck_message(base_token: str, quote_token: str, peg_data: dict) -> str:
     status = '✅ Pegged' if abs(peg_data['deviation']) <= peg_data['max_deviation'] else '⚠️ Deviating'
     return f"""
-*--------------------------------------------------------
+*--------------------------
 🔗 Peg Check {base_token}-{quote_token}
---------------------------------------------------------
+--------------------------
 Status: {status}
 Deviation: {peg_data['deviation']*100:.2f}%
---------------------------------------------------------*
+--------------------------*
 Base Price: {peg_data['base_price']}
 Quote Price: {peg_data['quote_price']}
 """
@@ -93,13 +93,13 @@ def create_keyboard_layout(
 async def format_price_message(token: str, price_data: dict) -> str:
   """Format price data into a consistent message format"""
   message = f"""
-*--------------------------------------------------------
+*--------------------------
 💲 {token} Mark Prices
---------------------------------------------------------
+--------------------------
 Index Price: {price_data.get('idx', 'N/A')}
 CEX Price: {price_data.get('CEX.idx', 'N/A')}
 DEX Price: {price_data.get('DEX.idx', 'N/A')}
---------------------------------------------------------*
+--------------------------*
 """
   for origin, price in price_data.items():
     message += f"\n[{origin}](https://t.me/BtrMarketsBot?liqinfo={token}.{origin}): {price}"

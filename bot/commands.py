@@ -115,12 +115,12 @@ async def convert_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
   
   # Format and send conversion result
   message = f"""
-*--------------------------------------------------------
-💱 Conversion Result
---------------------------------------------------------*
-{round_sigfig(conv_args['amount'])} {conv_args['base']} = {round_sigfig(result['quote_amount'])} {conv_args['quote']}
-Rate: 1 {conv_args['base']} = {result['rate']} {conv_args['quote']}
---------------------------------------------------------
+*--------------------------
+💱 {conv_args['base']}->{conv_args['quote']}
+--------------------------*
+{conv_args['amount']} {conv_args['base']} = {round_sigfig(result['quote_amount'])} {conv_args['quote']}
+Rate: 1 {conv_args['base']} = {round_sigfig(result['rate'])} {conv_args['quote']}
+--------------------------
 """
   await update.message.reply_text(message, parse_mode='Markdown')
 
@@ -170,7 +170,12 @@ async def oprange_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def tokens_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
   tokens = await get_tokens()
   token_list = '\n'.join([f'• {token}' for token in tokens])
-  await update.message.reply_text(f'Available tokens:\n{token_list}')
+  await update.message.reply_text(f"""
+*--------------------------
+🧾 Available Tokens
+--------------------------*
+{token_list}
+""", parse_mode='Markdown')
 
 async def liqinfo_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
   if not context.args or len(context.args) != 1:
@@ -188,9 +193,9 @@ async def liqinfo_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     info = schema[token]['fields'][origin]
     info_text = f"""
---------------------------------------------------------
-*💧 Liquidity Info for {token}.{origin}*
---------------------------------------------------------
+*--------------------------
+💧 {token}.{origin} Info
+--------------------------*
 """
     if 'target' in info:
       info_text += f"\n*Target*\n| `{info['target']}`"
