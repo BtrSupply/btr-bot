@@ -156,16 +156,16 @@ async def pegcheck_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
   await update.message.reply_text('Select first token:', reply_markup=reply_markup)
 
 async def liqmap_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-  tokens = await get_tokens()
-  keyboard = create_keyboard_layout(tokens, callback_prefix='liqmap', max_cols=3)
-  reply_markup = InlineKeyboardMarkup(keyboard)
-  await update.message.reply_text('Select a token:', reply_markup=reply_markup)
+  await update.message.reply_text(
+    "The liquidity mapping will be available soon!\n\n"
+    "This feature will provide detailed insights into token's on-chain and off-chain market depth."
+  )
 
 async def oprange_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-  tokens = await get_tokens()
-  keyboard = [[InlineKeyboardButton(token, callback_data=f'oprange_base_{token}') for token in tokens]]
-  reply_markup = InlineKeyboardMarkup(keyboard)
-  await update.message.reply_text('Select first token:', reply_markup=reply_markup)
+  await update.message.reply_text(
+    "The optimal range estimation will be available soon!\n\n"
+    "This feature will help determine optimal Concentrated Liquidity ranges for supported token pairs."
+  )
 
 async def tokens_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
   tokens = await get_tokens()
